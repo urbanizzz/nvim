@@ -1,0 +1,329 @@
+sudo apt-get install aptitude
+sudo aptitude install mc
+
+настройка задержки символа перед повтором
+~/.config/lxsession/Lubuntu/desktop.conf
+[Keyboard]
+Delay=200
+Interval=30
+Beep=1
+
+настройка русского языка:
+если при установке системы выбран русский язык, то он установлен по умолчанию
+на Alt-Shift, и ScrollLock в качестве индикатора
+для смены сочетаний клавиш надо править файл etc/default/keyboard
+http://www.lubuntu.ru/forum/viewtopic.php?f=15&t=499
+для применения изменений полная перезагрузка
+
+настройка запоминания раскладки для каждого окна:
+ПКМ на панели -> (Добавить/убрать элементы панели)
+здесь надо добавить "обработчик раскладки клавиатуры"
+дальше ПКМ на этот обработчик -> (Настроить обработчик раскладки клавиатуры)
+поставить галку "Запоминать раскладку для каждого окна"
+
+все дополнительные методы ввода можно безболезненно удалить
+https://qastack.ru/unix/260601/understanding-setting-up-different-input-methods
+опробовано на fctix:
+зайти в synaptic ввести в поиске fcitx, отметить все для полного удаления и удалить
+
+
+
+
+настройка домашних папок
+файл ~/.config/user-dirs.dirs
+XDG_DESKTOP_DIR="$HOME/desktop"
+XDG_DOWNLOAD_DIR="$HOME/download"
+XDG_TEMPLATES_DIR="$HOME/"
+XDG_PUBLICSHARE_DIR="$HOME/"
+XDG_DOCUMENTS_DIR="$HOME/"
+XDG_MUSIC_DIR="$HOME/"
+XDG_PICTURES_DIR="$HOME/"
+XDG_VIDEOS_DIR="$HOME/"
+потом создать в ~/ папки desktop и download
+перелогиниться
+
+размер и положение терминала
+sudo leafpad /usr/share/applications/lxterminal.desktop
+редактируем строку  EXEC:
+Exec=lxterminal --geometry=90x25
+это для запуска терминала из меню
+для запуска по ctrl-alt-t редактируем файла ~/.config/openbox/lubuntu-rc.xml
+    <keybind key="C-A-T">
+      <action name="Execute">
+        <command>x-terminal-emulator --geometry=83x25</command>
+      </action>
+    </keybind>
+после перезагрузка
+
+setup chrome - https://help.ubuntu.ru/wiki/google_chrome
+sudo aptitude purge firefox firefox-locale-en firefox-locale-ru
+
+
+
+
+вывод иконок на панель запуска
+ПКМ на панели запуска - Настроить "Панель запуска приложений"
+Добавляем справа налево нужные иконки:
+Galculator
+
+
+положение иконок на рабочем столе
+расставить иконки, потом правой кнопкой на них:
+галочку на "Прикрепить к текущему положению"
+потом "Привязка к сетке"
+
+настройка часов
+ПКМ на часах - Настроить "Цифровые часы"
+в строку "формат часов" вставить:
+%a %d %b %R
+%a - сокращ день недели
+%d - день
+%b - сокращ месяц
+%R - время в 24-часовом формате
+источник http://www.opennet.ru/man.shtml?topic=strftime&category=3
+
+
+настройка grub:
+source: https://wiki.archlinux.org/index.php/GRUB_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)#%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D1%8B%D0%B9_%D1%84%D0%B0%D0%B9%D0%BB_%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D0%B8_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0
+
+в /boot/grub добавить файл menu.cfg:
+------------begin of file
+set default=0
+set timeout=4
+
+menuentry "Windows 10" {
+  chainloader (hd0,1)+1
+}
+
+menuentry "Linux" {
+  linux /boot/vmlinuz-linux root=/dev/sda3 rw 
+  initrd /boot/initramfs-linux.img
+}
+-----------end of file
+
+взять из grub.cfg нужные адреса для загрузки
+
+отредактировать /boot/grub/grub.cfg:
+все удалить и добавить строчку, перенаправляющую на другой файл:
+. $prefix/menu.cfg
+
+Чтобы защитить файл от любых изменений, присвойте ему атрибут immutable
+chattr +i /boot/grub/grub.cfg
+
+
+---------------zenity
+
+sudo aptitude install zenity
+если при использвании zenity выскакивает ошибка "Error retrieving accessibility bus address:
+org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.
+Bus was not provided by any .service files"
+установить
+sudo aptitude install at-spi2-core
+
+zenity выдает warning "GtkDialog mapped without a transient parent. This is discouraged."
+это о том, что окну надо назначить родителя (которого при запуске из shell неоткуда взять)
+в итоге либо не обращать внимания, либо скрывать error messages  путем добавления "2>/dev/null"
+
+
+
+установка Telegram
+качаем с сайта, теперь в downloads лежит архив
+в нем 2 файла - Telegram и Updates
+(Updates не пробовал, не знаю как с ним работать,
+по идее все обновления должны происходить автоматом при работе ТГ)
+файл Telegram кладем в нужную нам папку (лучше ~/.local/bin она есть в PATH), запускаться он будет оттуда
+запускаем ~/.local/bin/Telegram
+при первом запуске:
+1. Создается рабочая папка ~/.local/share/TelegramDesktop/
+2. Создается ярлык в  (меню -> интернет).
+Ярлык редактируем (ПКМ -> Свойства -> Ярлык программы)
+в строке (Команда) убираем -- %U и добавляем -startintray
+Потом ярлык прямо из меню мышкой перетаскиваем в папку автостарта
+
+автозагрузка
+chrome telegram 
+создать папку /home/reduktor/.config/autostart
+туда закинуть ярлыки из /usr/share/applications
+google-chrome.desktop
+редактируем каждый, убирая в команде Exec, после команды, запуска  параметры %U %F и прочие
+
+
+перенос иконок окна налево (http://help.ubuntu.ru/wiki/lubuntu-%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81%D0%B8%D0%BC_%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B8_%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F_%D0%BE%D0%BA%D0%BD%D0%B0%D0%BC%D0%B8)
+Открываем Openbox Configurator Manager (Менеджер настройки Openbox)
+Вкладка Appearance (Внешний вид окон)
+В поле Button order (Порядок элементов) набираем CMILN 
+Закрываем окно кнопкой Close
+
+aptitude install gimp
+aptitude install doublecmd-gtk
+
+
+настройка принтера сделана по ссылке:
+https://jonathan.bergknoff.com/journal/printing-ubuntu-canon-mf3010/
+инструкция сделана на cndrvcups ver2.70-1
+эти дрова лежали у меня на винте и я поставил их
+(потом обнаружил, что по ссылке лежат дрова версии 5.10-1,  на всякий случай скачал
+в следующий раз попробовать установить их)
+
+сначала установил cndrvcups-common_2.70-1_amd64.deb
+установилось норм
+
+потом cndrvcups-ufr2-us_2.70-1_amd64.deb
+при установке обнаружилась неудовлетворенная зависимость от libpng12-0
+действия для исправления (от https://omgfoss.com/fix-libpng12-0-missing-ubuntu-18-04/):
+в синаптике добавил в репозитории deb http://security.ubuntu.com/ubuntu xenial-security main
+обновил инфо о пакетах и установил libpng12-0
+теперь пакет cndrvcups-ufr2-us_2.70-1_amd64.deb оказался без ошибок
+
+проверил принтер, система принтер видит, но печать не происходит
+
+поставил остальные библиотеки и принтер заработал
+
+есть еще ссылка для установки сканера
+https://jonathan.bergknoff.com/journal/scanning-ubuntu-canon-mf3010/
+пока не пробовал ставить
+
+----------------------- настройка tor + iptables -----------------------------------------------------------------
+https://www.alexeykopytko.com/2016/tor-transparent-proxy/
+
+---
+1. установка tor
+sudo aptitude install tor
+
+в файл /etc/tor/torrc дописываем
+AutomapHostsOnResolve 1
+TransPort 9040
+DNSPort 5300
+ExcludeExitNodes {RU}, {UA}, {BY} 
+# HTTP tunnel для подключения в haskell (настройки прокси 127.0.0.1 9041)
+HTTPTunnelPort 9041  
+
+
+---
+2. установка ipset
+sudo aptitude install ipset
+
+создаем таблицу заблокированных адресов
+sudo ipset -exist create blacklist hash:ip
+
+переадресация для всех IP из черного списка (только для HTTP и HTTPS):
+sudo iptables -t nat -A PREROUTING -p tcp -m multiport --dports 80,443 -m set --match-set blacklist dst -j REDIRECT --to-port 9040
+sudo iptables -t nat -A OUTPUT -p tcp -m multiport --dports 80,443 -m set --match-set blacklist dst -j REDIRECT --to-port 9040
+
+добавление заблокированных сайтов вручную
+sudo ipset add blacklist $(dig +short rutracker.org)
+sudo ipset add blacklist $(dig +short telegram.org)
+можно настроить на весь список заблокированных сайтов, см ссылку вначале
+
+доступ к зоне .onion
+sudo iptables -t nat -A OUTPUT -p tcp -d 127.192.0.0/10 -j REDIRECT --to-port 9040
+sudo iptables -t nat -A OUTPUT -p udp --dport 53 -m string --hex-string "|056f6e696f6e00|" --algo bm -j REDIRECT --to-ports 5300
+
+скрипты для автозагрузки правил iptables и blacklist:
+(скрипты из папки if-up.d исполняются после включения сетевого адаптера)
+sudo iptables-save > /etc/network/if-up.d/iptables-rules
+sudo chmod +x /etc/network/if-up.d/iptables-rules
+
+/etc/network/if-up.d/ipset
+#!/bin/sh
+ipset -exist create blacklist hash:ip 
+ipset add blacklist $(dig +short rutracker.org)
+ipset add blacklist $(dig +short telegram.org)
+ipset add blacklist $(dig +short nnmclub.to)
+
+
+дать скрипту права на выполнение:
+sudo chmod +x /etc/network/if-pre-up.d/ipset
+
+!!!!!!!!!!!!!!
+
+не получается автозагрузить правила iptables ни одним способом (штук 5-6 перепробовал)
+сделал ручную загрузку:
+создаем файл с правилами
+sudo iptables-save -t nat > /etc/iptables.rules
+
+скрипт iptables.restore в папке home 
+#!/bin/sh
+iptables-restore < /etc/iptables.rules
+exit 0
+
+дать ему права на исполнение
+
+после загрузки открыть терминал и написать
+sudo ./iptables.restore
+
+----------------------- конец настройки tor + iptables -----------------------------------------------------------------
+
+
+----------------------------- haskell -----------------------------------------------
+установка stack
+https://docs.haskellstack.org/en/stable/README/
+
+setup VSCode - https://losst.ru/kak-ustanovit-visual-studio-code-na-ubuntu
+Extensions:
+Haskell syntax highlighting
+
+настройка git на ssh
+https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
+
+проверяем git, он должен быть уже установлен
+aptitude show git
+работа с git
+https://github.com/andreiled/mipt-cs-4sem/wiki/%D0%9F%D0%BE%D1%88%D0%B0%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F-%D0%BF%D0%BE-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B5-%D1%81-git-%D0%B8-github-%D0%B4%D0%BB%D1%8F-%D1%81%D1%82%D1%83%D0%B4%D0%B5%D0%BD%D1%82%D0%BE%D0%B2
+
+начальные настройки
+~/.config/git/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+при загрузке не консольной проги из терминала, чтобы строка терминала не подвисала
+открытие файлов в одном окне geany
+
+
+
+старое
+
+текстовый редактор geany
+sudo aptitude install geany
+в файловом менеджере открываешь св-ва текстового файла, а там править "Открыть с помощью..."
+
+
+установка skype:
+сначала зависимости
+sudo aptitude install libqt4-dbus libqt4-network libqt4-xml libqtcore4 libqtgui4 libqtwebkit4
+теперь skype
+начиная с версии 4.3 скайп не поддерживает ALSA, поэтому устанавливаем pulseaudio
+sudo add-apt-repository ppa:ubuntu-audio-dev/ppa
+sudo apt-get update && sudo apt-get upgrade
+sudo aptitude install pulseaudio
+sudo aptitude install pavucontrol   //настройка звука
+устанавливаем skype
+sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
+настраиваем звук и микрофон
+
+автозагрузка
+audacious skype chromium transmission и geany работы.txt
+создать папку /home/reduktor/.config/autostart
+туда закинуть ярлыки из /usr/share/applications
+audacious.desktop
+skype.desktop
+chromium-browser.desktop
+geany.desktop
+transmission-gtk.desktop
+редактируем каждый, убирая в команде Exec, после команды, запуска  параметры %U %F и прочие
+для transmission
+Exec=transmission-gtk --minimized
+для geany:
+Exec geany desktop/работы.txt
+

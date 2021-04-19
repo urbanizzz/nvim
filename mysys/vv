@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+nvim -p src/*.hs
+

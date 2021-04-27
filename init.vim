@@ -26,7 +26,7 @@ syntax on
 set nu
 
 " setup Haskell IDE
-source $XDG_CONFIG_HOME/nvim/quickfix_ghc.vim
+source $XDG_CONFIG_HOME/nvim/haskell.vim
 " maps 
 source $XDG_CONFIG_HOME/nvim/maps.vim
 " plugins

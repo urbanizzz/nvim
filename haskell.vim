@@ -39,6 +39,7 @@ au FileType haskell call QuickFixHaskell()
 function! QuickFixHaskell()
   ino <buffer> -. ->
   ino <buffer> ,- <-
+  ino <buffer> =. =>
   if filereadable('./package.yaml')
     set makeprg=stack\ build
   else

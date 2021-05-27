@@ -20,6 +20,9 @@ nmap <C-L> 5l
   cmap <C-L> <Del>
 " <--
 
+" NERDTree
+:nmap <F2> :NERDTreeToggle<CR>
+
 " Работа с табами
 :map <A-,> <C-c>:tabprevious<CR>
 :map <A-.> <C-c>:tabnext<CR>

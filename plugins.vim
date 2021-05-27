@@ -4,9 +4,10 @@ if empty(glob("~/.config/nvim/autoload/plug.vim"))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'scrooloose/nerdtree.git'
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
+" execute when is need to install a new plugin
 " PlugInstall
 
 

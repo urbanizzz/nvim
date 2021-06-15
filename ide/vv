@@ -1,0 +1,13 @@
+#!/bin/zsh
+# Script run Vim IDE for Haskell
+# Location is '~/.local/bin/'
+# Config file '.vim/ide.vim' must be in project directory
+#
+
+if [[ ! -e ".vim/ide.vim" ]]
+then
+    echo "Vim IDE error: .vim/ide.vim is not found."
+    exit 1
+fi
+
+nvim -S .vim/ide.vim

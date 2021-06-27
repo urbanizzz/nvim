@@ -57,4 +57,13 @@ function! QuickFixHaskell()
                    \%+C\ \ %#%m,
                    \%W%>%f:%l:%c:,
                    \%+C\ \ %#%tarning:\ %m,
+
+  set fillchars="vert:|,fold: "
+  set foldtext=HaskellFoldText()
+endfunction
+
+function HaskellFoldText()
+  let line = getline(v:foldstart)
+"  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+  return v:folddashes . line
 endfunction

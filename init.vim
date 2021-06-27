@@ -31,6 +31,8 @@ source $XDG_CONFIG_HOME/nvim/haskell.vim
 source $XDG_CONFIG_HOME/nvim/maps.vim
 " plugins
 source $XDG_CONFIG_HOME/nvim/plugins.vim
+" include color select
+" source $XDG_CONFIG_HOME/nvim/colorselect.vim
 
 " Опции автодополнения - включаем только меню с доступными вариантами
 " автодополнения (также, например, для omni completion может быть

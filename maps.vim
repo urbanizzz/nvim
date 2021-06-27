@@ -83,24 +83,3 @@ inoremap <A-y> <Up><C-O>ye<Down><C-O>p
   vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 " <--
 
-" let g:my_super_color=120
-" function ChangeColor(delta)
-"   let g:my_super_color=g:my_super_color + a:delta
-"   if g:my_super_color<0
-"     let g:my_super_color=0
-"   endif
-"   if g:my_super_color>255
-"     let g:my_super_color=255
-"   endif
-"   execute "highlight" "TabLineSel" "ctermbg=" . g:my_super_color
-"   echo g:my_super_color
-" endfunction
-
-" nmap .m :call ChangeColor(10)<CR>
-" nmap ,m :call ChangeColor(-10)<CR>
-" nmap .n :call ChangeColor(5)<CR>
-" nmap ,n :call ChangeColor(-5)<CR>
-" nmap .b :call ChangeColor(1)<CR>
-" nmap ,b :call ChangeColor(-1)<CR>
-
-

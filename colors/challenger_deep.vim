@@ -36,6 +36,8 @@ let s:lighter_black   = { "gui": "#545454", "cterm": "240", "cterm16" : "240" }
 
 " lighter shadows and darker grays
 let s:subtle_black  = { "gui": "#303030", "cterm": "236", "cterm16" : "236" }
+" urbanizzz: from subtle_black, for Folded ctermbg, only cterm changed
+let s:subtle_black_pred  = { "gui": "#303030", "cterm": "235", "cterm16" : "236" }
 let s:light_gray    = { "gui": "#B2B2B2", "cterm": "249", "cterm16" : "249" }
 let s:lighter_gray  = { "gui": "#C6C6C6", "cterm": "251", "cterm16" : "251" }
 
@@ -49,8 +51,7 @@ let s:dark_red = { "gui": "#ff5458", "cterm": "203", "cterm16": "9"}
 
 let s:green = { "gui": "#95ffa4", "cterm": "120", "cterm16": "2"}
 let s:dark_green = { "gui": "#62d196", "cterm": "119", "cterm16": "10"}
-" urbanizzz: my color for bg TabLineSel, I defined just "cterm"
-" "gui" and "cterm16" is copy of dark_green
+" urbanizzz: from dark_green, for TabLineSel ctermbg, only cterm changed
 let s:pale_green = { "gui": "#62d196", "cterm": "65", "cterm16": "10"}
 
 let s:yellow = { "gui": "#ffe9aa", "cterm": "228", "cterm16": "3"}
@@ -179,7 +180,8 @@ call s:h("Title",         {"fg": s:dark_blue})
 call s:h("Visual",        {"bg": s:visual})
 call s:h("WarningMsg",    {"fg": s:yellow})
 call s:h("WildMenu",      {"fg": s:bg_subtle, "bg": s:cyan})
-call s:h("Folded",        {"bg": s:purple, "fg": s:bg_subtle})
+" call s:h("Folded",        {"bg": s:purple, "fg": s:bg_subtle})
+call s:h("Folded",        {"bg": s:subtle_black_pred, "fg": s:medium_gray})
 call s:h("FoldColumn",    {"fg": s:yellow})
 call s:h("DiffAdd",       {"fg": s:green})
 call s:h("DiffDelete",    {"fg": s:red})

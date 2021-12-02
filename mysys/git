@@ -1,3 +1,31 @@
+file in work directory:
+  tracked (отслеживаемый, под версионным контролем, файлы находящиеся в последнем снимке состояния)
+  untracked (неотслеживаемый, без версионного контроля)
+
+tracked file:
+  unmodified
+  modified
+  staged (подготовленный к коммиту, проиндексированный)
+
+git add <file>
+  untracked file -> staged file
+  modified file -> staged file (индексация изменений, т.е. включение в индекс, подготовка к коммиту)
+
+git reset HEAD <file> или
+git restore --staged <file> (git version 2.23.0)
+  staged file -> unstaged file (исключение файла из индекса)
+
+git checkout -- <file> или
+git restore <file> (git version 2.23.0)
+  discard changes in <file> (откат изменений в файле)
+
+" коммит в локалрепо
+git commit -m "%commit_message%"
+" коммит в локалрепо с вводом комментария
+git commit
+" коммит с добавлением всех изменений в индекс (без git add)
+git commit -a
+
 " конфигурирование git
 git config --global user.name urbanizzz
 git config --global user.email yuraoskin@gmail.com
@@ -39,13 +67,6 @@ git status
 " подготовка к коммиту
 git add %file_path%
 git add --all
-
-" коммит в локалрепо
-git commit -m "%commit_message%"
-" коммит в локалрепо с вводом комментария
-git commit
-" коммит с добавлением всех изменений в индекс (без git add)
-git commit -a
 
 " история изменений
 git log

@@ -7,17 +7,26 @@ tracked file:
   modified
   staged (подготовленный к коммиту, проиндексированный)
 
+" индексация изменений, т.е. включение в индекс, подготовка к коммиту
 git add <file>
   untracked file -> staged file
-  modified file -> staged file (индексация изменений, т.е. включение в индекс, подготовка к коммиту)
+  modified file -> staged file
 
+" исключение файла из индекса
 git reset HEAD <file> или
 git restore --staged <file> (git version 2.23.0)
-  staged file -> unstaged file (исключение файла из индекса)
+  staged file -> unstaged file
 
+" откат изменений в файле)
 git checkout -- <file> или
 git restore <file> (git version 2.23.0)
-  discard changes in <file> (откат изменений в файле)
+  discard changes in <file>
+
+" внесение изменений в последний коммит
+  " предварительно вносим измения и добавляем их в индекс
+  " потом выполняем команду и открывается редактор с текстом сообщения предыдущего коммита, который правим и сохраняем
+  " в итоге предыдущий коммит заменяется новым
+git commit --amend
 
 " коммит в локалрепо
 git commit -m "%commit_message%"

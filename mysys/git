@@ -43,7 +43,7 @@ git config --global core.editor nvim
 " клонирование репозитория на локал
 git clone https://github.com/%user_login%/%repo_name%.git
 " при аутентификации по SSH
-git clone ssh:github.com/%user_login%/%repo_name%.git
+git clone git@github.com:%user_login%/%repo_name%.git
 " Что происходит при вызове этой команды?
 " 1. Создаётся новый каталог, переход внутрь каталога
 " 2. Выполняется git init для создания пустого репозитория

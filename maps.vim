@@ -27,6 +27,10 @@ nmap <C-L> 5l
 :map <A-,> <C-c>:tabprevious<CR>
 :map <A-.> <C-c>:tabnext<CR>
 :map <A-n> <C-c>:tabnew<CR>
+" The default Alt key behavior in xterm is a modifier to send eight bit input
+" characters. Therefore Alt key don't work as Alt. To fix this add to
+" .Xresources: (source https://wiki.archlinux.org/title/Xterm)
+" XTerm.vt100.metaSendsEscape: true
 
     " Запуск/сокрытие плагина Winmanager
 "    map <F1> :WMToggle<CR>

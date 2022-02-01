@@ -79,13 +79,19 @@ git status
 git add %file_path%
 git add --all
 
-" история изменений
+" история изменений нынешней ветки
 git log
-git log --name-only
+" история изменений ветки %branch%
+git log %branch%
+" история изменений всех веток
+git log --all
 
 " просмотр изменений индексируемых файлов
 git diff
 git diff --staged
+
+# переход на ветку %branch%
+git checkout %branch%
 
 " загрузить изменения в удалрепо (запушить)
 git push origin master

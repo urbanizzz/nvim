@@ -93,6 +93,9 @@ git diff --staged
 # переход на ветку %branch%
 git checkout %branch%
 
+# прекратить отслеживание файла
+git rm --cached %file%
+
 " загрузить изменения в удалрепо (запушить)
 git push origin master
 " скачать изменения с удалрепо и смержить их с локалрепо

@@ -1,5 +1,4 @@
 " Maintainer:	Yury Oskin <yuraoskin@gmail.com>
-" Last change:	2021 Mar 24
 
 " Включаем мышку даже в текстовом режиме
 set mouse=a
@@ -26,14 +25,10 @@ syntax on
 set nu
 
 " setup Haskell IDE
-" variable $XDG_CONFIG_HOME isn't defined without X11
-" source $XDG_CONFIG_HOME/nvim/haskell.vim
 source $HOME/.config/nvim/haskell.vim
 " maps 
-" source $XDG_CONFIG_HOME/nvim/maps.vim
 source $HOME/.config/nvim/maps.vim
 " plugins
-" source $XDG_CONFIG_HOME/nvim/plugins.vim
 source $HOME/.config/nvim/plugins.vim
 " include color select
 " source $XDG_CONFIG_HOME/nvim/colorselect.vim

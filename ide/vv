@@ -1,13 +1,35 @@
-#!/bin/zsh
+#!/bin/sh
 # Script run Vim IDE for Haskell
 # Location is '~/.local/bin/'
 # Config file '.vim/ide.vim' must be in project directory
 #
 
-if [[ ! -e ".vim/ide.vim" ]]
-then
-    echo "Vim IDE error: .vim/ide.vim is not found."
-    exit 1
+script_stop ()
+{
+  echo "ERROR:"
+  echo $1
+  echo "Script interrupted"
+  exit 1
+}
+
+if [[ ! -e ".vim/ide.vim" ]] ; then
+#    echo "Vim IDE error: .vim/ide.vim is not found."
+#    exit 1
+
+# Checking for we are placed in stack project directory
+  if [[ ! -e "package.yaml" ]] ; then
+    script_stop "This is not a stack project directory"
+  else
+    echo ".vim/ide.vim is not found. Initialising Vim IDE..."
+    if [[ ! -e ".vim" ]] ; then
+      echo "Creating directory .vim"
+      mkdir .vim
+    elif [[ -f ".vim" ]] ; then
+     script_stop ".vim is a file, not directory" 
+    fi
+    echo "Copying ide.vim..."
+    cp $HOME/.config/nvim/ide/ide.vim .vim/
+  fi
 fi
 
 nvim -S .vim/ide.vim

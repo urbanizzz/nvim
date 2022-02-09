@@ -27,6 +27,9 @@ nmap <C-L> 5l
 :map <A-,> <C-c>:tabprevious<CR>
 :map <A-.> <C-c>:tabnext<CR>
 :map <A-n> <C-c>:tabnew<CR>
+:map <A-<> <C-c>:tabmove -1<CR>
+:map <A->> <C-c>:tabmove +1<CR>
+
 " The default Alt key behavior in xterm is a modifier to send eight bit input
 " characters. Therefore Alt key don't work as Alt. To fix this add to
 " .Xresources: (source https://wiki.archlinux.org/title/Xterm)
@@ -56,7 +59,7 @@ inoremap <A-y> <Up><C-O>ye<Down><C-O>p
 " Переключение раскладок и индикация выбранной
 " в данный момент раскладки.
 " -->
-  " Переключение раскладок будет производиться по <C-F>
+  " Переключение раскладок будет производиться по <C-A>
   "
   " При английской раскладке статусная строка текущего окна будет синего
   " цвета, а при русской - зеленого.
@@ -81,9 +84,9 @@ inoremap <A-y> <Up><C-O>ye<Down><C-O>p
   " индикации текущей раскладки
   au WinEnter * :call MyKeyMapHighlight()
 
-  cmap <silent> <C-F> <C-^>
-  imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-  nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-  vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+  cmap <silent> <C-A> <C-^>
+  imap <silent> <C-A> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+  nmap <silent> <C-A> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+  vmap <silent> <C-A> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 " <--
 

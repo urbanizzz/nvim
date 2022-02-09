@@ -4,6 +4,9 @@
 # Config file '.vim/ide.vim' must be in project directory
 #
 
+# todo: check not only for package.yaml
+# todo: adding .vim to .gitignore
+
 script_stop ()
 {
   echo "ERROR:"

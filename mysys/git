@@ -17,16 +17,26 @@ git reset HEAD <file> или
 git restore --staged <file> (git version 2.23.0)
   staged file -> unstaged file
 
-" откат изменений в файле)
+" откат изменений в файле
 git checkout -- <file> или
 git restore <file> (git version 2.23.0)
   discard changes in <file>
+
+" откат изменений всего проекта (с удалением изменений)
+git restore --hard HEAD~
+
+" вообще работа reset описана здесь:
+" https://git-scm.com/book/ru/v2/Инструменты-Git-Раскрытие-тай-reset#r_git_reset
 
 " внесение изменений в последний коммит
   " предварительно вносим измения и добавляем их в индекс
   " потом выполняем команду и открывается редактор с текстом сообщения предыдущего коммита, который правим и сохраняем
   " в итоге предыдущий коммит заменяется новым
 git commit --amend
+  " то же самое можно сделать
+  git reset --soft HEAD~
+  " подготовить Индекс
+  git commit
 
 " коммит в локалрепо
 git commit -m "%commit_message%"

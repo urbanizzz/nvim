@@ -1,5 +1,8 @@
 " hotkeys`
 
+" отмена привязки выхода на Ctrl-z
+noremap <C-z> <nop>
+
 " Ускоренное передвижение по тексту
 nmap <C-H> 5h
 nmap <C-J> 5j
@@ -18,6 +21,20 @@ nmap <C-L> 5l
   cmap <C-J> <Left>
   cmap <C-K> <Right>
   cmap <C-L> <Del>
+" <--
+
+" Быстрая вставка из регистров, взяты первые пять
+" -->
+  nmap p0 "0p
+  nmap p1 "1p
+  nmap p2 "2p
+  nmap p3 "3p
+  nmap p4 "4p
+  nmap P0 "0P
+  nmap P1 "1P
+  nmap P2 "2P
+  nmap P3 "3P
+  nmap P4 "4P
 " <--
 
 " NERDTree
@@ -49,6 +66,9 @@ nmap <C-L> 5l
 nmap <C-Space> :nohlsearch<CR>
 imap <C-Space> <Esc>:nohlsearch<CR>
 vmap <C-Space> <Esc>:nohlsearch<CR>gv
+
+" открыть/закрыть складку
+nnoremap Z za
 
 " :imap jj <Esc>
 " :nnoremap mw <C-w>_

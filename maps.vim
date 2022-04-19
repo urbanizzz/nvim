@@ -1,3 +1,6 @@
+" convert raw JSON to pretty JSON
+command PrettyJSON :%!python -m json.tool
+
 " hotkeys`
 
 " отмена привязки выхода на Ctrl-z

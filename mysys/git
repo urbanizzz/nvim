@@ -57,6 +57,7 @@ git clone git@github.com:%user_login%/%repo_name%.git
 3. cd myrepo
 4. git init (инициализация репозитория)
 5. git remote add origin url/to/myrepo (связываем локалрепо с удалрепо)
+5.1 git remote add origin git@github.com:%user_login%/%repo_name%.git (то же через ssh)
 
 
 " просмотр информации об удалрепо, выводит имя сервера (origin  по умолчанию)

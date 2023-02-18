@@ -44,11 +44,13 @@ nmap <C-L> 5l
 :nmap <F2> :NERDTreeToggle<CR>
 
 " Работа с табами
-:map <A-,> <C-c>:tabprevious<CR>
-:map <A-.> <C-c>:tabnext<CR>
-:map <A-n> <C-c>:tabnew<CR>
-:map <A-<> <C-c>:tabmove -1<CR>
-:map <A->> <C-c>:tabmove +1<CR>
+map <A-,> <C-c>:tabprevious<CR>
+map <A-.> <C-c>:tabnext<CR>
+imap <A-,> <C-c>:tabprevious<CR>
+imap <A-.> <C-c>:tabnext<CR>
+map <A-n> <C-c>:tabnew<CR>
+map <A-<> <C-c>:tabmove -1<CR>
+map <A->> <C-c>:tabmove +1<CR>
 
 " The default Alt key behavior in xterm is a modifier to send eight bit input
 " characters. Therefore Alt key don't work as Alt. To fix this add to
@@ -73,7 +75,7 @@ vmap <C-Space> <Esc>:nohlsearch<CR>gv
 " открыть/закрыть складку
 nnoremap Z za
 
-" :imap jj <Esc>
+imap jj <Esc>
 " :nnoremap mw <C-w>_
 nnoremap ; :
 " Вставить слово находящееся над курсором

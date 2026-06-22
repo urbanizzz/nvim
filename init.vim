@@ -1,5 +1,8 @@
 " Maintainer:	Yury Oskin <yuraoskin@gmail.com>
 
+" Назначение лидера
+let mapleader=" "
+
 " Включаем мышку даже в текстовом режиме
 set mouse=a
 
@@ -24,12 +27,12 @@ syntax on
 " Включаем отображение номеров строк
 set nu
 
-" setup Haskell IDE
-source $HOME/.config/nvim/haskell.vim
 " maps 
 source $HOME/.config/nvim/maps.vim
 " plugins
 source $HOME/.config/nvim/plugins.vim
+" lsp server
+luafile $HOME/.config/nvim/lsp.lua
 " include color select
 " source $XDG_CONFIG_HOME/nvim/colorselect.vim
 
@@ -83,13 +86,6 @@ set whichwrap=b,s,<,>,[,],l,h
 
 " Метод фолдинга - вручную (для обычных файлов)
 set foldmethod=manual
-
-" Настраиваем переключение раскладок клавиатуры по <C-^>
-set keymap=russian-jcukenwin
-" Раскладка по умолчанию - английская
-set iminsert=0
-" Раскладка по умолчанию в строке поиска
-set imsearch=0
 
 " Просмотр нетекстовых файлов в Vim -->
     au BufReadPost *.pdf silent %!pdftotext -nopgbrk "%" - |fmt -csw78

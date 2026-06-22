@@ -1,3 +1,19 @@
+" Включаем режим, когда системная раскладка ВСЕГДА английская
+" Neovim будет сам эмулировать русский язык при вводе
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+
+" Настройка переключения
+" Caps (в Neovim придет как <CapsLock>) -> Английский
+inoremap <CapsLock> <C-^><C-O>:set iminsert=0<CR>
+cnoremap <CapsLock> <C-^>:set iminsert=0<CR>
+
+" Shift-Caps -> Русский
+inoremap <S-CapsLock> <C-^><C-O>:set iminsert=1<CR>
+cnoremap <S-CapsLock> <C-^>:set iminsert=1<CR>
+
+
 " convert raw JSON to pretty JSON
 command PrettyJSON :%!python -m json.tool
 
@@ -89,29 +105,29 @@ inoremap <A-y> <Up><C-O>ye<Down><C-O>p
   " При английской раскладке статусная строка текущего окна будет синего
   " цвета, а при русской - зеленого.
 
-  function MyKeyMapHighlight()
-    if &iminsert == 0
-      " g:colors_name определяется в цветовой теме challenger_deep
-      if (exists("g:colors_name"))
-        hi StatusLine ctermfg=Blue guifg=Blue
-      else
-        hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
-      endif
-    else
-      hi StatusLine ctermfg=DarkGreen guifg=DarkGreen
-    endif
-  endfunction
-
-  " Вызываем функцию, чтобы она установила цвета при запуске Vim'a
-  call MyKeyMapHighlight()
-
-  " При изменении активного окна будет выполняться обновление
-  " индикации текущей раскладки
-  au WinEnter * :call MyKeyMapHighlight()
-
-  cmap <silent> <C-A> <C-^>
-  imap <silent> <C-A> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-  nmap <silent> <C-A> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-  vmap <silent> <C-A> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+"  function MyKeyMapHighlight()
+"    if &iminsert == 0
+"      " g:colors_name определяется в цветовой теме challenger_deep
+"      if (exists("g:colors_name"))
+"        hi StatusLine ctermfg=Blue guifg=Blue
+"      else
+"        hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+"      endif
+"    else
+"      hi StatusLine ctermfg=DarkGreen guifg=DarkGreen
+"    endif
+"  endfunction
+"
+"  " Вызываем функцию, чтобы она установила цвета при запуске Vim'a
+"  call MyKeyMapHighlight()
+"
+"  " При изменении активного окна будет выполняться обновление
+"  " индикации текущей раскладки
+"  au WinEnter * :call MyKeyMapHighlight()
+"
+"  cmap <silent> <C-A> <C-^>
+"  imap <silent> <C-A> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+"  nmap <silent> <C-A> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+"  vmap <silent> <C-A> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 " <--
 
